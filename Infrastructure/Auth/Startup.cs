@@ -1,9 +1,16 @@
-﻿using Infrastructure.Auth.Jwt;
+﻿using Application.Auth.Tokens;
+using Application.Auth.Users;
+using Application.Common.Interfaces;
+using Application.Core.Organizations;
+using Application.Core.Products;
+using Infrastructure.Auth.Jwt;
 using Infrastructure.Auth.Permissions;
-
+using Infrastructure.Common.Services;
+using Infrastructure.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MultiTenant.Infrastructure.Auth;
 
 namespace Infrastructure.Auth
 {
@@ -30,6 +37,11 @@ namespace Infrastructure.Auth
                 });
             })
             .AddScoped<IAuthorizationHandler, AdminUserPermissionsHandler>()
-            .AddScoped<IAuthorizationHandler, BasicUserPermissionsHandler>();
+            .AddScoped<IAuthorizationHandler, BasicUserPermissionsHandler>()
+            .AddTransient<IOrganizationService, OrganizationService>()
+            .AddTransient<ISerializerService, NewtonSoftService>()
+            .AddTransient<IProductService, ProductService>()
+            .AddTransient<ITokenService, TokenService>()
+            .AddTransient<IUserService, UserService>();
     }
 }
