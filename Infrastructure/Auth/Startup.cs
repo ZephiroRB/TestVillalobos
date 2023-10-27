@@ -1,9 +1,12 @@
-﻿using Infrastructure.Auth.Jwt;
+﻿using Application.Auth.Tokens;
+using Application.Auth.Users;
+using Infrastructure.Auth.Jwt;
 using Infrastructure.Auth.Permissions;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MultiTenant.Infrastructure.Auth;
 
 namespace Infrastructure.Auth
 {
@@ -18,6 +21,8 @@ namespace Infrastructure.Auth
 
         private static IServiceCollection AddPermissions(this IServiceCollection services) =>
         services
+            .AddScoped<IUserService, UserService>()
+            .AddScoped<ITokenService, TokenService>()
             .AddAuthorization(options =>
             {
                 options.AddPolicy("BasicUserPermissionsPolicy", policy =>
