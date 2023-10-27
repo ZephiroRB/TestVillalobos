@@ -1,10 +1,10 @@
 ﻿using Application.Core.Products;
-
 using Domain;
-
 using Infrastructure.Persistence.Context;
 
+
 using Microsoft.EntityFrameworkCore;
+
 
 namespace Infrastructure.Core
 {
@@ -24,13 +24,13 @@ namespace Infrastructure.Core
 
         public async Task<Product> GetByIdAsync(int id)
         {
-            return _dbContext.Products.FindAsync(id);
+            return await _dbContext.Products.FirstOrDefaultAsync(item=>item.Id == id);
         }
 
         public async Task<int> CreateAsync(Product product)
         {
             _dbContext.Products.Add(product);
-            _dbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync();
             return product.Id;
         }
 

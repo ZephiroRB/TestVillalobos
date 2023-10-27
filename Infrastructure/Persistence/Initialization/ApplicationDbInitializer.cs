@@ -22,7 +22,7 @@ namespace Infrastructure.Persistence.Initialization
             {
                 if ((await _dbContext.Database.GetPendingMigrationsAsync(cancellationToken)).Any())
                 {
-                   
+                    await _dbContext.Database.MigrateAsync(cancellationToken);
                 }
             }
             if (await _dbContext.Database.CanConnectAsync(cancellationToken))

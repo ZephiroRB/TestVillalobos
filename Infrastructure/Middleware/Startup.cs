@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Application.Common.Interfaces;
+using Infrastructure.Common.Services;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure.Middleware
@@ -6,7 +8,9 @@ namespace Infrastructure.Middleware
     internal static class Startup
     {
         internal static IServiceCollection AddExceptionMiddleware(this IServiceCollection services) =>
-        services.AddScoped<ExceptionMiddleware>();
+            services
+                .AddScoped<ISerializerService, NewtonSoftService>()
+                .AddScoped<ExceptionMiddleware>();
 
         internal static IApplicationBuilder UseExceptionMiddleware(this IApplicationBuilder app) =>
             app.UseMiddleware<ExceptionMiddleware>();

@@ -1,5 +1,7 @@
 ﻿using Application.Common.Interfaces;
-
+using Application.Core.Organizations;
+using Application.Core.Products;
+using Infrastructure.Core;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure.Common
@@ -8,7 +10,9 @@ namespace Infrastructure.Common
     {
         internal static IServiceCollection AddServices(this IServiceCollection services) =>
         services
-            .AddServices(typeof(ITransientService), ServiceLifetime.Transient);
+            .AddServices(typeof(ITransientService), ServiceLifetime.Transient)
+            .AddTransient<IOrganizationService, OrganizationService>()
+            .AddTransient<IProductService, ProductService>();
 
         internal static IServiceCollection AddServices(this IServiceCollection services, Type interfaceType, ServiceLifetime lifetime)
         {

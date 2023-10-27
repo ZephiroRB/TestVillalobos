@@ -11,9 +11,12 @@ namespace Infrastructure.Persistence
     {
         internal static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration config)
         {
+            var strMaster = config.GetConnectionString("MasterBaseConnection");
+            var strBaseConnection = config.GetConnectionString("BaseConnection");
+            
             return services
-                .AddDbContext<MasterDbContext>(options => options.UseSqlServer(config.GetConnectionString("MasterBas3Connection")))
-                .AddDbContext<ProductDbContext>(options => options.UseSqlServer(config.GetConnectionString("BaseConnection")))
+                .AddDbContext<MasterDbContext>(options => options.UseSqlServer(strMaster))
+                .AddDbContext<ProductDbContext>(options => options.UseSqlServer(strBaseConnection))
                 .AddTransient<IDatabaseInitializer, DatabaseInitializer>()
                 .AddTransient<ApplicationDbInitializer>()
                 .AddTransient<ApplicationDbSeeder>();
