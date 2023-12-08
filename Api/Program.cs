@@ -47,6 +47,8 @@ await app.Services.InitializeDatabasesAsync();
 
 app.UseInfrastructure(builder.Configuration);
 
+app.UseSwagger();
+app.UseSwaggerUI();
 
 
 app.UseHttpsRedirection();
