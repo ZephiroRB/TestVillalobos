@@ -16,7 +16,7 @@ namespace Infrastructure.Common
                 AppDomain.CurrentDomain.GetAssemblies()
                     .SelectMany(s => s.GetTypes())
                     .Where(t => interfaceType.IsAssignableFrom(t)
-                                && t.IsClass && t.IsAbstract)
+                                && t.IsClass)
                     .Select(t => new
                     {
                         Service = t.GetInterfaces().FirstOrDefault(),
