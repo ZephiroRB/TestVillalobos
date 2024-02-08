@@ -38,7 +38,7 @@ namespace Infrastructure.Auth.Permissions
                 var organization = await _organizationService.GetByIdAsync(user.OrganizationId);
                 if (organization != null)
                 {
-                    if (organization.Name == "r0ot" || organizationName == organization.Name)
+                    if (organization.Name == "root" || organizationName == organization.Name)
                     {
                         context.Succeed(requirement);
                     }

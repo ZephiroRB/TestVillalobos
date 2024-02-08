@@ -24,7 +24,7 @@ namespace Infrastructure.Core
 
         public async Task<Product> GetByIdAsync(int id)
         {
-            return _dbContext.Products.FindAsync(id);
+            return _dbContext.Products.FirstOrDefault(x => x.Id == id);
         }
 
         public async Task<int> CreateAsync(Product product)

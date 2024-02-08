@@ -7,7 +7,7 @@ using Domain;
 namespace Api.Controllers
 {
     [Authorize("AdminUserPermissionsPolicy")]
-    [Route("[controller]")]
+    [Route("/[controller]")]
     public class OrganizationsController : BaseApiController
     {
         private readonly IOrganizationService _organizationService;

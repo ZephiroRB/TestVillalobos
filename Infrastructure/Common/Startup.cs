@@ -1,5 +1,5 @@
 ﻿using Application.Common.Interfaces;
-
+using Infrastructure.Common.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure.Common
@@ -29,6 +29,8 @@ namespace Infrastructure.Common
             {
                 services.AddService(type.Service, type.Implementation, lifetime);
             }
+
+            services.AddScoped<ISerializerService, NewtonSoftService>();
 
             return services;
         }

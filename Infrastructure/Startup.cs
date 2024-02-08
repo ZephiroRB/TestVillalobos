@@ -1,5 +1,6 @@
 ﻿using Infrastructure.Auth;
 using Infrastructure.Common;
+using Infrastructure.Core;
 using Infrastructure.Mapping;
 using Infrastructure.Middleware;
 using Infrastructure.Multitenancy;
@@ -21,8 +22,10 @@ namespace Infrastructure
                 .AddAuth(config)
                 .AddExceptionMiddleware()
                 .AddMultitenancy(config)
+      
                 .AddPersistence(config)
-                .AddServices();
+                .AddServices()
+                .AddCore();
         }
 
         public static async Task InitializeDatabasesAsync(this IServiceProvider services, CancellationToken cancellationToken = default)
@@ -36,7 +39,8 @@ namespace Infrastructure
         public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder builder, IConfiguration config)
         {
             return builder
-                .UseExceptionMiddleware();
+                .UseExceptionMiddleware()
+             .UseMultiTenancy();
         }
     }
 }

@@ -12,6 +12,7 @@ namespace Infrastructure.Multitenancy
         {
             return services
                 .AddTransient<ITenantService, TenantService>();
+                 
         }
 
         internal static IApplicationBuilder UseMultiTenancy(this IApplicationBuilder app)

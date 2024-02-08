@@ -27,6 +27,7 @@ namespace Infrastructure.Persistence.Initialization
             }
             if (await _dbContext.Database.CanConnectAsync(cancellationToken))
             {
+                await _dbSeeder.SeedDatabaseAsync(_dbContext, cancellationToken);
             }
         }
     }
