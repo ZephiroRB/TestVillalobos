@@ -1,5 +1,5 @@
 ﻿using Application.Common.Interfaces;
-
+using Infrastructure.Common.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure.Common
@@ -8,6 +8,7 @@ namespace Infrastructure.Common
     {
         internal static IServiceCollection AddServices(this IServiceCollection services) =>
         services
+            .AddTransient<ISerializerService, NewtonSoftService>()
             .AddServices(typeof(ITransientService), ServiceLifetime.Transient);
 
         internal static IServiceCollection AddServices(this IServiceCollection services, Type interfaceType, ServiceLifetime lifetime)
